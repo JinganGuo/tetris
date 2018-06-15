@@ -31,3 +31,15 @@
     position: absolute;
     box-sizing: border-box;
 }
+
+.none{
+    background: #F2FAFF;
+}
+.current{
+    background: pink;
+    border: 1px solid red;
+}
+.done{
+    background: gray;
+    border: 1px solid black;
+}
