@@ -1,0 +1,33 @@
+.game{
+    width: 200px;
+    height: 400px;
+    background: #F2FAFF;
+    border: 1px solid blue;
+    border-top: none;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+}
+
+.next{
+    width: 80px;
+    height: 80px;
+    background: #F2FAFF;
+    border: 1px solid blue;
+    position: absolute;
+    left: 240px;
+    top: 10px;
+}
+
+.info{
+    position: absolute;
+    left: 240px;
+    top: 110px;
+}
+
+.none, .current, .done{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    box-sizing: border-box;
+}
