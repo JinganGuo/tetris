@@ -35,6 +35,32 @@ let Game = function () {
     // 下一个方块
     let next;
 
+    // 清除数据
+    let clearData = function() {
+        for(let i = 0; i < cur.data.length; i ++) {
+            for (let j = 0; j < cur.data[0].length; j ++) {
+                gameData[cur.origin.x + i][cur.origin.y + j] = 0;
+            }
+        }
+    };
+
+    // 设置数据
+    let setData = function(){
+        for(let i = 0; i < cur.data.length; i ++) {
+            for (let j = 0; j < cur.data[0].length; j ++) {
+                gameData[cur.origin.x + i][cur.origin.y + j] = cur.data[i][j];
+            }
+        }
+    };
+
+    // 下移
+    let down = function(){
+        clearData();
+        cur.origin.x += 1;
+        setData();
+        refreshDiv(gameData, gameDivs);
+    };
+
     // 初始化div
     let initDiv = function(container, data, divs){
         for(let i = 0; i < data.length; i ++){
@@ -79,11 +105,8 @@ let Game = function () {
 
         cur.origin.x = 0;
         cur.origin.y = 0;
-        for(let i = 0; i < cur.data.length; i ++) {
-            for (let j = 0; j < cur.data[0].length; j ++) {
-                gameData[cur.origin.x + i][cur.origin.y + j] = cur.data[i][j];
-            }
-        }
+        
+        setData();
 
         refreshDiv(gameData, gameDivs);
         refreshDiv(next.data, nextDivs);
@@ -91,4 +114,5 @@ let Game = function () {
 
     // 导出API
     this.init = init;
+    this.down = down;
 }
