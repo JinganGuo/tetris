@@ -20,10 +20,10 @@ let Game = function () {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 1, 0, 0]
     ];
 
     // divs
@@ -37,6 +37,9 @@ let Game = function () {
 
     // 检测点是否合法
     let check = function (pos, x, y) {
+
+        console.log(gameData[pos.x + x][pos.y + y]);
+
         if (pos.x + x < 0) {
             return false;
         } else if (pos.x + x >= gameData.length) {
@@ -65,8 +68,6 @@ let Game = function () {
         }
         return true;
     }
-
-
 
     // 清除数据
     let clearData = function () {
