@@ -18,12 +18,12 @@ let Game = function () {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 1, 1, 1, 1, 0, 0]
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
 
     // divs
@@ -37,9 +37,7 @@ let Game = function () {
 
     // 检测点是否合法
     let check = function (pos, x, y) {
-
-        console.log(gameData[pos.x + x][pos.y + y]);
-
+        console.log("--" + pos.x + "---" + pos.y);
         if (pos.x + x < 0) {
             return false;
         } else if (pos.x + x >= gameData.length) {
@@ -85,6 +83,7 @@ let Game = function () {
         for (let i = 0; i < cur.data.length; i++) {
             for (let j = 0; j < cur.data[0].length; j++) {
                 if (check(cur.origin, i, j)) {
+                    console.log("正在设置数据！");
                     gameData[cur.origin.x + i][cur.origin.y + j] = cur.data[i][j];
                 }
             }
@@ -112,6 +111,7 @@ let Game = function () {
     // 右移
     let right = function () {
         if (cur.canRight(isValid)) {
+            console.log("I can move to right!");
             clearData();
             cur.right();
             setData();
@@ -161,8 +161,8 @@ let Game = function () {
         initDiv(gameDiv, gameData, gameDivs);
         initDiv(nextDiv, next.data, nextDivs);
 
-        cur.origin.x = 0;
-        cur.origin.y = 0;
+        cur.origin.x = 10;
+        cur.origin.y = 5;
 
         setData();
 

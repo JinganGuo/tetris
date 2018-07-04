@@ -14,7 +14,7 @@ let Square = function () {
 };
 
 Square.prototype.canDown = function(isValid) {
-    let test = {};
+    let test = {};          
     test.x = this.origin.x + 1;
     test.y = this.origin.y;
    return isValid(test, this.data);
@@ -38,5 +38,5 @@ Square.prototype.canRight = function(isValid) {
    return isValid(test, this.data);
 };
 Square.prototype.right = function(){
-    this.origin.y += 1;
+    this.origin.y = this.origin.y + 1;
 }
