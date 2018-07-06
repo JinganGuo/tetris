@@ -2,7 +2,7 @@ let Local = function (socket) {
     // 游戏对象
     let game;
     // 时间间隔
-    const INTERVAL = 200;
+    const INTERVAL = 2000;
     // 定时器
     let timer = null;
     // 时间计数器
@@ -16,18 +16,23 @@ let Local = function (socket) {
             if (e.keyCode == 37) {
                 // left
                 game.left();
+                socket.emit("left");
             } else if (e.keyCode == 38) {
                 // up
                 game.rotate();
+                socket.emit("rotate");
             } else if (e.keyCode == 39) {
                 // right
                 game.right();
+                socket.emit("right");
             } else if (e.keyCode == 40) {
                 // down
                 game.down();
+                socket.emit("down");
             } else if (e.keyCode == 32) {
                 // space
                 game.fall();
+                socket.emit("fall");
             }
         }
     };
@@ -42,9 +47,21 @@ let Local = function (socket) {
             resultDiv: document.getElementById("local_gameover")
         }
         game = new Game();
-        game.init(doms, generateType(), generateDir());
+        let type = generateType();
+        let dir = generateDir();
+        game.init(doms, type, dir);
+        socket.emit("init", {
+            type: type,
+            dir: dir
+        })
         bindKeyEvent();
-        game.performNext(generateType(), generateDir());
+        let next_type = generateType();
+        let next_dir = generateDir();
+        game.performNext(next_type, next_dir);
+        socket.emit("next", {
+            type: next_type,
+            dir: next_dir
+        })
         timer = setInterval(move, INTERVAL);
     }
 
@@ -55,22 +72,38 @@ let Local = function (socket) {
         if (!game.down()) {
             // 固定方块
             game.fixed();
+            socket.emit("fixed");
             // 检查是否可以消除行
             let line = game.checkClear();
             if (line) {
                 game.addScore(line);
+                socket.emit("line", line);
+                if(line > 1) {
+                    let bottomLines = generateBottomLine(line);
+                    socket.emit("bottomLines", bottomLines);
+                }
             }
             // 检查游戏是否结束
             let gameOver = game.checkGameOver();
             if (gameOver) {
                 // 结束游戏
-                game.showGameover();
+                game.showGameover(false);
+                document.getElementById("remote_gameover").innerHTML = "你赢了";
+                socket.emit("lose");
                 stop();
             } else {
                 // 生成下一个方块
-                game.performNext(generateType(), generateDir());
+                let next_type = generateType();
+                let next_dir = generateDir();
+                game.performNext(next_type, next_dir);
+                socket.emit("next", {
+                    type: next_type,
+                    dir: next_dir
+                })
             }
-        };
+        } else {
+            socket.emit("down");
+        }
     }
 
     // 结束
@@ -111,12 +144,28 @@ let Local = function (socket) {
             timeCount = 0;
             time++;
             game.setTime(time);
-            if (time % 10 == 0) {
-                game.addTailLines(generateBottomLine(1));
-            }
+            socket.emit("time", time);
         }
     };
 
-    // 导出API
-    this.start = start;
+    socket.on("start", function(){
+        document.getElementById("waiting").innerHTML = "";
+        start();
+    });
+
+    socket.on("lose", function(){
+        game.showGameover(true);
+        stop();
+    });
+
+    socket.on("leave", function () { 
+        document.getElementById("local_gameover").innerHTML = "对方已掉线";
+        document.getElementById("remote_gameover").innerHTML = "已掉线";
+        stop();
+     });
+
+     socket.on("bottomLines", function (data) {
+        game.addTailLines(data);
+        socket.emit("addTailLines", data);
+     });
 }

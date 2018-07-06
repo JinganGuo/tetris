@@ -1,8 +1,8 @@
-let Remote = function(socket){
+let Remote = function (socket) {
     // 游戏对象
     let game;
     // 开始
-    let start = function(type, dir) {
+    let start = function (type, dir) {
         let doms = {
             gameDiv: document.getElementById("remote_game"),
             nextDiv: document.getElementById("remote_next"),
@@ -13,50 +13,49 @@ let Remote = function(socket){
         game = new Game();
         game.init(doms, type, dir);
     };
+
     // 绑定按钮事件
-    
-    let bindEvents = function(){
-        document.getElementById("down").onclick = function(){
-            game.down();
-        };
-        document.getElementById("left").onclick = function(){
-            game.left();
-        };
-        document.getElementById("right").onclick = function(){
-            game.right();
-        };
-        document.getElementById("rotate").onclick = function(){
+    let bindEvents = function () {
+        socket.on("init", function (data) {
+            start(data.type, data.dir);
+        });
+        socket.on("next", function (data) {
+            game.performNext(data.type, data.dir);
+        });
+        socket.on("rotate", function(){
             game.rotate();
-        };
-        document.getElementById("fall").onclick = function(){
-            game.fall();
-        };
-        document.getElementById("fixed").onclick = function(){
+        });
+        socket.on("down", function(){
+            game.down();
+        });
+        socket.on("left", function(){
+            game.left();
+        });
+        socket.on("right", function(){
+            game.right();
+        });
+        socket.on("fixed", function(){
             game.fixed();
-        };
-        document.getElementById("performNext").onclick = function(){
-            game.performNext(2, 2);
-        };
-        document.getElementById("checkClear").onclick = function(){
+        });
+        socket.on("fall", function(){
+            game.fall();
+        });
+        socket.on("line", function(line){
             game.checkClear();
-        };
-        document.getElementById("checkGameOver").onclick = function(){
-            game.checkGameOver();
-        };
-        document.getElementById("setTime").onclick = function(){
-            game.setTime(20);
-        };
-        document.getElementById("addScore").onclick = function(){
-            game.addScore(200);
-        };
-        document.getElementById("showGameover").onclick = function(){
-            game.showGameover(true);
-        };
-        document.getElementById("addTailLines").onclick = function(){
-            game.addTailLines([[0, 1, 0, 1, 1, 1, 0, 0, 0, 1]]);
-        };
+            game.addScore(line);
+        });
+        socket.on("time", function(time){
+            game.setTime(time);
+        });
+        socket.on("lose", function(){
+            game.showGameover(false);
+        });
+        socket.on("addTailLines", function(data){
+            game.addTailLines(data);
+        });
+      
+
     };
-    // 导出
-    this.start = start;
-    this.bindEvents = bindEvents;
+
+    bindEvents();
 };

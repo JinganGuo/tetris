@@ -13,6 +13,7 @@
 
 <body>
     <div class="container">
+        <div id="waiting"></div>
         <!-- 游戏区域 -->
         <div class="local clearfix">
             <h3>我的游戏区域</h3>
@@ -45,20 +46,6 @@
                         <span id="remote_score">0</span>分</p>
                     <div id="remote_gameover"></div>
 
-                    <!-- 测试 -->
-                    <button id="down">down</button> <br>
-                    <button id="left">left</button> <br>
-                    <button id="right">right</button> <br>
-                    <button id="rotate">rotate</button> <br>
-                    <button id="fall">fall</button> <br>
-                    <button id="fixed">fixed</button> <br>
-                    <button id="performNext">performNext</button> <br>
-                    <button id="checkClear">checkClear</button> <br>
-                    <button id="checkGameOver">checkGameOver</button> <br>
-                    <button id="setTime">setTime</button> <br>
-                    <button id="addScore">addScore</button> <br>
-                    <button id="showGameover">showGameover</button> <br>
-                    <button id="addTailLines">addTailLines</button> <br>
 
                 </div>
                  
@@ -66,7 +53,8 @@
         </div>
     </div>
 
-
+   
+    <script src="js/socket.io.js"></script>
     <script src="js/square.js"></script>
     <script src="js/squareFactory.js"></script>
     <script src="js/local.js"></script>
