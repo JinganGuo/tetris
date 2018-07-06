@@ -1,4 +1,4 @@
-let Remote = function(){
+let Remote = function(socket){
     // 游戏对象
     let game;
     // 开始

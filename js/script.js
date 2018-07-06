@@ -1,5 +1,8 @@
-let local = new Local();
-local.start();
-let remote = new Remote();
-remote.start(2, 2);
-remote.bindEvents();
+let socket = io("ws://localhost:8080");
+let local = new Local(socket);
+let remote = new Remote(socket);
+
+socket.on("waiting", function(str){
+    document.getElementById("waiting").innerHTML = str;
+});
+ 

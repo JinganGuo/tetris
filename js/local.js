@@ -1,4 +1,4 @@
-let Local = function () {
+let Local = function (socket) {
     // 游戏对象
     let game;
     // 时间间隔
