@@ -28,6 +28,16 @@ h3{
     position: relative;
     float: left;
 }
+header h2{
+    font-weight: normal;
+    text-align: center;
+}
+.introduce p{
+    font-size: 14px;
+}
+.hidden{
+    display: none;
+}
 
 .next{
     width: 80px;
