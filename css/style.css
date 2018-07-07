@@ -1,25 +1,29 @@
 .clearfix:before,
-.clearfix:after{
+.clearfix:after {
     display: table;
     content: "";
     clear: both;
 }
-.container{
+
+.container {
     text-align: center;
 }
-h3{
+
+h3 {
     text-align: center;
     font-weight: normal;
+    font-size: 20px;
 }
-.local, 
-.remote{
-    margin: 20px 40px; 
+.local,
+.remote {
+    margin: 20px 40px;
     display: inline-block;
 }
-.local{
+.local {
     border-right: 2px solid lightgray;
 }
-.game{
+
+.game {
     width: 200px;
     height: 400px;
     background: #F2FAFF;
@@ -28,50 +32,72 @@ h3{
     position: relative;
     float: left;
 }
-header h2{
-    font-weight: normal;
-    text-align: center;
-}
-.introduce p{
-    font-size: 14px;
-}
-.hidden{
-    display: none;
+
+header {
+    margin-top: 20px;
 }
 
-.next{
+header h2 {
+    font-weight: normal;
+    text-align: center;
+    font-size: 24px;
+}
+
+.introduce p {
+    font-size: 14px;
+    text-indent: 2rem;
+}
+.view-btn{
+    float: right;
+}
+.view{
+    /* 垂直排列 */
+    writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;      
+    writing-mode: vertical-rl;
+    letter-spacing: 5px;
+    vertical-align: middle;
+}
+
+ 
+
+.next {
     width: 80px;
     height: 80px;
     background: #F2FAFF;
     border: 1px solid blue;
     position: relative;
-    
 }
- 
-.info{
+
+.info {
     width: 150px;
     float: left;
     margin-left: 20px;
 }
-.score{
+
+.score {
     text-align: left;
 }
- 
-.none, .current, .done{
+
+.none,
+.current,
+.done {
     width: 20px;
     height: 20px;
     position: absolute;
     box-sizing: border-box;
 }
 
-.none{
+.none {
     background: #F2FAFF;
 }
-.current{
+
+.current {
     background: pink;
     border: 1px solid red;
 }
-.done{
+
+.done {
     background: gray;
     border: 1px solid black;
 }

@@ -8,20 +8,42 @@
     <title>俄罗斯方块</title>
 
     <!-- import css files -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
     <header>
         <h2>双人对抗俄罗斯方块</h2>
-        <button id="view_introduce">查看游戏说明</button>
-        <div class="introduce hidden">
-            <p>游戏为双人对战，当一个玩家进入后自动进入等待状态，另一个玩家进入则自动匹配开始游戏；</p>
-            <p>基本操作： ↑：旋转, ←：左移, →：右移, 空格：快速下落; </p>
+
+        <button class="btn view-btn" data-toggle="modal" data-target="#myModal">
+            <span class="view">游戏说明</span>
+        </button>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <strong>游戏介绍</strong>
+                    </div>
+                    <div class="modal-body introduce">
+                        <p>游戏为双人对战，当一个玩家进入后自动进入等待状态，另一个玩家进入则自动匹配开始游戏；</p>
+                        <p>基本操作： ↑：旋转, ←：左移, →：右移, 空格：快速下落; </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
         </div>
     </header>
-    <div class="container">
 
+
+    <div class="container">
         <div id="waiting"></div>
         <!-- 游戏区域 -->
         <div class="local clearfix">
@@ -72,20 +94,9 @@
     <script src="js/remote.js"></script>
     <script src="js/game.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-    <script>
-        let btn = document.getElementById("view_introduce");
-        let introduce = document.getElementsByClassName("introduce")[0];
-        btn.onclick = function(){
-            if(introduce.classList.contains("hidden")){
-                introduce.classList.remove("hidden");
-            } else{
-                introduce.classList.add("hidden");
-
-            }
-
-        };
-    </script>
 </body>
 
 </html>
