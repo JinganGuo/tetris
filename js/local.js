@@ -2,7 +2,7 @@ let Local = function (socket) {
     // 游戏对象
     let game;
     // 时间间隔
-    const INTERVAL = 2000;
+    const INTERVAL = 200;
     // 定时器
     let timer = null;
     // 时间计数器
@@ -88,7 +88,7 @@ let Local = function (socket) {
             if (gameOver) {
                 // 结束游戏
                 game.showGameover(false);
-                document.getElementById("remote_gameover").innerHTML = "你赢了";
+                document.getElementById("remote_gameover").innerHTML = "win!";
                 socket.emit("lose");
                 stop();
             } else {

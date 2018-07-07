@@ -272,9 +272,9 @@ let Game = function () {
     // 游戏结束
     let showGameover = function(win){
         if(win) {
-            resultDiv.innerHTML = "你赢了";
+            resultDiv.innerHTML = "win！";
         } else {
-            resultDiv.innerHTML = "你输了";
+            resultDiv.innerHTML = "lose……";
         }
     }
 

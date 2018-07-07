@@ -54,13 +54,8 @@ io.on("connection", function (socket) {
     bindListener(socket, "time");
     bindListener(socket, "lose");
     bindListener(socket, "bottomLines");
- 
     bindListener(socket, "addTailLines");
-
-
-        
-
-
+    
     socket.on("disconnect", function () {
         if (socket.clientNum % 2 == 0) {
             if (socketMap[socket.clientNum - 1]) {
