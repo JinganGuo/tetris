@@ -58,7 +58,14 @@ header h2 {
     letter-spacing: 5px;
     vertical-align: middle;
 }
-
+footer{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 12px;
+}
+footer p{
+    margin: 0;
+}
  
 
 .next {
